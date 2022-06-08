@@ -2,7 +2,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.3.
 
 ## git ignore notes
-The "node_modules" folder is large (> 300 MB), to not push it on github, verify it's presence in the .gitignore file
+The "node_modules" folder is large (> 300 MB) and other ressources do not need to be push on the github repository, pay attention to the .gitignore file to avoid pushing all useless files
 
 ## Development server
 
