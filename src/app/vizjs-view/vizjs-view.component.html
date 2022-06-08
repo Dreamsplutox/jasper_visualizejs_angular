@@ -1,0 +1,169 @@
+<p *ngIf="empty" style="color: red;">Aucune ressource disponible avec vos critères de recherche, veuillez modifier vos options en cliquant sur l'onglet "configuration"</p>
+<!-- Resource selection div -->
+<div id="folder_display" class="row input-group col-sm-12" style="margin-top:8px;">
+    <label id="label_resource_selection" class="col-form-label" for="resource_selection" style="display: none;">Loading ...</label>
+    &nbsp;
+    <select id="resource_selection" class="custom-select form-control form-control-xs col-lg-3" style="display: none;"></select>
+    <div class="col-sm-1"></div>
+</div>
+
+<!-- Modal for input controls -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modifier vos contrôles d'entrée</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="custom_params"></div>
+                <div id="ic" class="ic" style="height:">Loading</div>
+            </div>
+            <div class="modal-footer">
+                <button id="reload_default_report" type="button" class="btn btn-warning">Réinitialiser le rapport</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button id="submit_input_control" title="Modifiez les paramètres et cliquez sur ce bouton pour mettre à jour le rapport !" type="button" class="btn btn-primary" disabled="true">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for custom search -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Modifier vos critères de recherche</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-check">
+                    <input type="checkbox" id="case_sensitive_search" class="form-check-input" name="case_sensitive_search">
+                    <label for="case_sensitive_search" class="form-check-label">Sensible à la casse <i id="case_sensitive_search_icon" class="fas fa-square" style="color: red;"></i></label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" id="word_only_search" class="form-check-input" name="word_only_search">
+                    <label for="word_only_search" class="form-check-label">Recherche sur les mots (pas sur toute une case) <i id="word_only_search_icon" class="fas fa-square" style="color: red;"></i></label>
+                </div>
+                <label for="search-query"><b>Recherche : </b></label>
+                <input type="text" id="search-query" class="feature_btn form-control col-lg-7"/>
+                <br>
+                <!-- btn to trigger modal -->
+                <button id="searchNavigationModal-button" class="feature_btn col-md-12 btn-hover btn-danger" data-toggle="modal" data-target="#searchNavigationModal" style="display: none;">Recherche par pages <i class="fas fa-search"></i></button>
+            </div>
+            <div class="modal-footer">
+                <button id="reload_search" type="button" class="btn btn-warning">Désactiver la recherche</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button id="submit_new_search" type="button" class="btn btn-primary">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal to navigate into pages that matches the custom search  -->
+<div class="modal fade" id="searchNavigationModal" tabindex="-1" role="dialog" aria-labelledby="searchNavigationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchNavigationModalLabel">Voici les pages qui contiennent le mot recherché</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" align="center">
+                <label id="label_search_group_navigation" for="search_group_navigation"></label><!--: (groupes de 10 pages)</b></label>-->
+<!--                 <input type="text" id="search_group_navigation" class="feature_btn form-control col-lg-7"/> -->
+                <div id="search_results_by_page" class="col-md-12"><!-- align="center"> -->
+                    <!-- the content-->
+                    <!-- create page_min_occurence + sample text + page_max_occurence in TS file-->
+                    <!-- create one btn for each page with a result for our search -->
+                </div>
+                <p><i>Menu pour itérer sur les différentes pages où se trouvent le mot recherché</i></p>
+                <div class="row input-group col-md-5 d-flex">
+                    <button name='previous_intern_pagination' class='intern_pagination_btn btn btn-hover btn-primary'><</button>
+                    <label id='intern_page_label' for='intern_page' class='col-form-label offset-md-1'>page 1 :</label>
+                    &nbsp;
+                    <input type='text' id='intern_page' class='form-control'/>
+                    <button name='next_intern_pagination' class='intern_pagination_btn offset-md-1 btn btn-hover btn-primary'>></button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Fixed feature bar -->
+<div id="hide_fix_bar" style="display:none; position: -webkit-sticky; position: sticky; top: 0; z-index:10; background-color: #eeeeee; margin-left:2px; margin-top:8px;">
+    <div class="row col-sm-12" align="center" id="features_fixed_bar">
+        <!-- Pagination section -->
+        <div id="pagination_feature" class="input-group col-sm-3 d-flex justify-content-center" style="border-right: 1px solid black;">
+            <button id="previousPage" class="feature_btn btn btn-hover btn-primary" disabled><b><</b></button>
+
+            <label id="page_label" for="page" class="col-form-label offset-md-1">page 1 :</label>
+            &nbsp;
+            <input type="text" id="page" class="feature_btn form-control col-lg-3" disabled />
+
+            <button id="nextPage" class="feature_btn btn offset-md-1 btn-hover btn-primary" disabled><b>></b></button>
+        </div>
+        <!-- Zoom section -->
+        <div id="zoom_feature" class="input-group col-sm-3 d-flex justify-content-center" style="border-right: 1px solid black;">
+            <button id="zoom_minus" class="feature_btn btn btn-hover btn-primary" disabled><b>-</b></button>
+
+            <label id="zoom_custom_label" class="col-form-label offset-md-1" for="zoom_custom">Zoom 100% :</label>
+            &nbsp;
+            <input type="text" id="zoom_custom" class="feature_btn form-control col-lg-3" disabled />
+
+            <button id="zoom_plus" class="feature_btn btn offset-md-1 btn-hover btn-primary" disabled><b>+</b></button>
+        </div>
+        <!-- Export section -->
+        <div id="export_feature" class="input-group col-sm-2 input-group-sm d-flex justify-content-center" style="border-right: 1px solid black;">
+            <button id="export_button" class="feature_btn btn offset-md-1 btn-hover btn-primary" disabled>Export</button>
+        </div>
+        <div id="page_search_feature" class="input-group col-sm-2 input-group-sm d-flex justify-content-center" style="border-right:1px solid black;">
+            <!-- <select id="search_parameters" multiple>
+                <option id="case_sensitive_search">sensible à la casse</option>
+                <option id="word_only_search">mots entiers uniquement</option>
+            </select> -->
+            <!-- <input type="checkbox" id="case_sensitive_search">
+            <label for="case_sensitive_search">sensible à la casse</label> -->
+            <button id="searchModal-button" class="feature_btn btn offset-md-1 btn-hover btn-primary" data-toggle="modal" data-target="#searchModal">Recherche <i class="fas fa-search"></i></button>
+        </div>
+        <!-- Input control section -->
+        <div id="input_control_feature" class="input-group col-sm-2 d-flex justify-content-center">
+            <!-- Button to trigger modal -->
+            <button id="modal_btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Modifier les paramètres
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- loading resource div-->
+<div id="loading_resource" class="loading_resource container" style="display: none; margin-left: 2px;">
+    <div class="row">
+        <!-- loader -->
+        <div id="loader" class="loader col-xs-1" style="display: block;"></div>
+
+        <!-- cancel resource execution -->
+        <div class="col-xs-1">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        </div>
+        <div id="cancel_execution_div" class="col-xs-1 align-self-center">
+            <button id="cancel_execution" class="cancel_execution btn btn-danger">Annuler le chargement</button>
+        </div>
+    </div>
+</div>
+
+<!-- error message -->
+<p id="error_message"></p>
+
+<!-- Resource layout container -->
+<div id="resource_container" class="col-xs-12"></div>

@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <div class="navbar-collapse">
+      <ul class="nav navbar-nav">
+          <li class="nav-item" routerLinkActive="active"><a id="link_auth" class="nav-link"  routerLink="auth">Authentification</a></li>
+          <li class="nav-item" routerLinkActive="active"><a id="link_vizjs-view" class="nav-link"  routerLink="vizjs-view">VisualizeJS</a></li>
+          <li class="nav-item" routerLinkActive="active"><a id="link_vizjs-config" class="nav-link"  routerLink="vizjs-config">Configuration</a></li>
+      </ul>
+      <div class="navbar-right ml-auto">
+        <p class="text-light">Bienvenue dans l'application {{ title }} !</p>
+      </div>
+    </div>
+  </div>
+</nav>          
+
+<div class="container col-sm-12">
+  <router-outlet></router-outlet>
+</div>

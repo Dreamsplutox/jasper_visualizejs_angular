@@ -1,0 +1,22 @@
+<!-- Auth form to be identified as a Jaspersoft user -->
+<div class="row">
+	<div id="authentication_jasper" class="col-lg-3 col-md-3 col-sm-3 col-xs-3" *ngIf="!authStatus">
+		<h4>Authentification</h4>
+		<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+		    <div class="form-group">
+		        <label class="col-form-label" for="j_username">Nom d'utilisateur Jasper</label>
+		        <input id="j_username" class="form-control" type="text" name="n_j_username" ngModel required>
+		    </div>
+		    <div class="form-group">
+		        <label class="col-form-label" for="j_password">Mot de passe</label>
+		        <input id="j_password" class="form-control" type="password" name="n_j_password" ngModel required>
+		    </div>
+		    <button class="btn btn-primary" type="submit" [disabled]="f.invalid">Se connecter</button>
+		</form>
+		<p id="error_auth" class="text-danger"></p>
+	</div>
+	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" *ngIf="authStatus">
+		<h4>Authentification</h4>
+		<button class="btn btn-danger" (click)="onSignOut()">Se déconnecter</button>
+	</div>
+</div>
