@@ -1,8 +1,12 @@
-# VizJSAngu12
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.3.
+# angular8Vizjs
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.2.
 
 ## git ignore notes
 The "node_modules" folder is large (> 300 MB) and other ressources do not need to be push on the github repository, pay attention to the .gitignore file to avoid pushing all useless files
+
+## Project installation
+To install this project, use the documentation available in the "docs" folder
+--> "mise_en_place_application_angular8_vizjs_10062022"
 
 ## Development server
 
