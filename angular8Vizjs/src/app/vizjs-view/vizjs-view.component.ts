@@ -821,6 +821,7 @@ export class VizjsViewComponent implements OnInit, OnDestroy {
       instance.drawResource_var_dict["current_resource_type"] = "adhocDataView";
       console.log("adhocView rendering");
       instance.hideOrShowReportHTMLElements(true);
+      console.log("DEBUG, ressource name  ==> "+ instance.drawResource_var_dict["first_resource_data"][0]);
       instance.drawResource_var_dict["adhocView"] = v.adhocView({
           resource: instance.drawResource_var_dict["first_resource_data"][0],
           container: "#resource_container",
@@ -831,6 +832,7 @@ export class VizjsViewComponent implements OnInit, OnDestroy {
               console.log("adhocView loaded");
           },
           error: function (error) {
+              console.log("error properties : "+ Object.getOwnPropertyNames(error));
               //deactivate loader + cancel button
               $("#loading_resource").css("display", "none");
               instance.drawResource_var_dict["cancel"] < 2 ? instance.recreateInactiveTimeout(instance) : console.log("");
